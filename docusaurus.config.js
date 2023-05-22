@@ -1,0 +1,98 @@
+// @ts-check
+// Note: type annotations allow type checking and IDEs autocompletion
+
+const lightCodeTheme = require("prism-react-renderer/themes/github");
+const darkCodeTheme = require("prism-react-renderer/themes/dracula");
+
+/** @type {import('@docusaurus/types').Config} */
+const config = {
+  title: "Chen yuan",
+  tagline: "Always eager to learn",
+  url: "https://chen-yuan-blog.vercel.app/",
+  baseUrl: "/",
+  onBrokenLinks: "throw",
+  onBrokenMarkdownLinks: "warn",
+  favicon: "img/favicon.ico",
+  organizationName: "chen yuan", // Usually your GitHub org/user name.
+  projectName: "blog", // Usually your repo name.
+  plugins: ["@docusaurus/theme-live-codeblock"],
+  i18n: {
+    defaultLocale: "zh-Hans",
+    locales: ["zh-Hans"],
+  },
+  presets: [
+    [
+      "classic",
+      /** @type {import('@docusaurus/preset-classic').Options} */
+      ({
+        docs: {
+          sidebarPath: require.resolve("./sidebars.js"),
+          // Please change this to your repo.
+          editUrl:
+            "https://github.com/chenyuan-new/blogByDocusaurus/blob/main/",
+        },
+        blog: {
+          showReadingTime: true,
+          // Please change this to your repo.
+          editUrl:
+            "https://github.com/chenyuan-new/blogByDocusaurus/blob/main/",
+        },
+        theme: {
+          customCss: require.resolve("./src/css/custom.css"),
+        },
+      }),
+    ],
+  ],
+
+  themeConfig:
+    /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
+    ({
+      docs: {
+        sidebar: {
+          hideable: true,
+        },
+      },
+      announcementBar: {
+        id: "support_us",
+        content:
+          '⭐️ 如果这个网站能帮助到你，欢迎给一个star支持作者  <a target="_blank" rel="noopener noreferrer" href="https://github.com/chenyuan-new/blogByDocusaurus">GitHub</a>',
+        backgroundColor: "#fafbfc",
+        textColor: "#091E42",
+        isCloseable: true,
+      },
+      navbar: {
+        title: "Chen yuan的博客",
+        hideOnScroll: true,
+        items: [
+          // {
+          //   type: "search",
+          //   position: "right",
+          // },
+          {
+            type: "doc",
+            docId: "Html&CSS/html",
+            position: "right",
+            label: "知识库",
+          },
+          { to: "blog/hello", label: "blog", position: "right" },
+          {
+            href: "https://github.com/chenyuan-new/blogByDocusaurus",
+            label: "GitHub",
+            position: "right",
+          },
+        ],
+      },
+      // FIXME 引入更多的languages
+      prism: {
+        theme: lightCodeTheme,
+        darkTheme: darkCodeTheme,
+        defaultLanguage: "javascript",
+        additionalLanguages: ["rust"],
+      },
+      colorMode: {
+        respectPrefersColorScheme: true,
+      },
+    }),
+};
+
+module.exports = config;
