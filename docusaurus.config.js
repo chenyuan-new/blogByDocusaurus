@@ -1,44 +1,44 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
-const lightCodeTheme = require("prism-react-renderer/themes/github");
-const darkCodeTheme = require("prism-react-renderer/themes/dracula");
+const lightCodeTheme = require('prism-react-renderer/themes/github');
+const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: "Chen yuan",
-  tagline: "Always eager to learn",
-  url: "https://chen-yuan-blog.vercel.app/",
-  baseUrl: "/",
-  onBrokenLinks: "throw",
-  onBrokenMarkdownLinks: "warn",
-  favicon: "img/favicon.ico",
-  organizationName: "chen yuan", // Usually your GitHub org/user name.
-  projectName: "blog", // Usually your repo name.
-  plugins: ["@docusaurus/theme-live-codeblock"],
+  title: 'Chen yuan',
+  tagline: 'Always eager to learn',
+  url: 'https://chen-yuan-blog.vercel.app/',
+  baseUrl: '/',
+  onBrokenLinks: 'throw',
+  onBrokenMarkdownLinks: 'warn',
+  favicon: 'img/favicon.ico',
+  organizationName: 'chen yuan', // Usually your GitHub org/user name.
+  projectName: 'blog', // Usually your repo name.
+  plugins: ['@docusaurus/theme-live-codeblock'],
   i18n: {
-    defaultLocale: "zh-Hans",
-    locales: ["zh-Hans"],
+    defaultLocale: 'zh-Hans',
+    locales: ['zh-Hans'],
   },
   presets: [
     [
-      "classic",
+      'classic',
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
-          sidebarPath: require.resolve("./sidebars.js"),
+          sidebarPath: require.resolve('./sidebars.js'),
           // Please change this to your repo.
           editUrl:
-            "https://github.com/chenyuan-new/blogByDocusaurus/blob/main/",
+            'https://github.com/chenyuan-new/blogByDocusaurus/blob/main/',
         },
         blog: {
           showReadingTime: true,
           // Please change this to your repo.
           editUrl:
-            "https://github.com/chenyuan-new/blogByDocusaurus/blob/main/",
+            'https://github.com/chenyuan-new/blogByDocusaurus/blob/main/',
         },
         theme: {
-          customCss: require.resolve("./src/css/custom.css"),
+          customCss: require.resolve('./src/css/custom.css'),
         },
       }),
     ],
@@ -53,32 +53,32 @@ const config = {
         },
       },
       announcementBar: {
-        id: "support_us",
+        id: 'support_us',
         content:
           '⭐️ 如果这个网站能帮助到你，欢迎给一个star支持作者  <a target="_blank" rel="noopener noreferrer" href="https://github.com/chenyuan-new/blogByDocusaurus">GitHub</a>',
-        backgroundColor: "#fafbfc",
-        textColor: "#091E42",
+        backgroundColor: '#fafbfc',
+        textColor: '#091E42',
         isCloseable: true,
       },
       navbar: {
-        title: "Chen yuan的博客",
+        title: 'Chen yuan的博客',
         hideOnScroll: true,
         items: [
-          // {
-          //   type: "search",
-          //   position: "right",
-          // },
           {
-            type: "doc",
-            docId: "Html&CSS/html",
-            position: "right",
-            label: "知识库",
+            type: 'search',
+            position: 'right',
           },
-          { to: "blog/hello", label: "blog", position: "right" },
           {
-            href: "https://github.com/chenyuan-new/blogByDocusaurus",
-            label: "GitHub",
-            position: "right",
+            type: 'doc',
+            docId: 'Html&CSS/html',
+            position: 'right',
+            label: '知识库',
+          },
+          { to: 'blog/hello', label: 'blog', position: 'right' },
+          {
+            href: 'https://github.com/chenyuan-new/blogByDocusaurus',
+            label: 'GitHub',
+            position: 'right',
           },
         ],
       },
@@ -86,11 +86,20 @@ const config = {
       prism: {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
-        defaultLanguage: "javascript",
-        additionalLanguages: ["rust"],
+        defaultLanguage: 'javascript',
+        additionalLanguages: ['rust'],
       },
       colorMode: {
         respectPrefersColorScheme: true,
+      },
+      algolia: {
+        // The application ID provided by Algolia
+        appId: '4P8N3GM9K9',
+
+        // Public API key: it is safe to commit it
+        apiKey: 'e6cfcacca2f69ee4177b2c74f1fa7376',
+
+        indexName: 'chen-yuan-vercel',
       },
     }),
 };
