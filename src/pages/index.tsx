@@ -113,7 +113,7 @@ function HomepageHeader() {
         <div className={styles.buttons}>
           <Link
             className="button button--secondary button--lg"
-            to="/docs/Html&CSS/html"
+            to="/docs/源码阅读/zustand"
           >
             前端博客 →
           </Link>
