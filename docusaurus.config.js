@@ -15,7 +15,19 @@ const config = {
   favicon: "img/favicon.ico",
   organizationName: "chen yuan", // Usually your GitHub org/user name.
   projectName: "blog", // Usually your repo name.
-  plugins: ["@docusaurus/theme-live-codeblock"],
+  plugins: [
+    "@docusaurus/theme-live-codeblock",
+    [
+      "@docusaurus/plugin-content-docs",
+      {
+        id: "forOtherPlatforms",
+        path: "forOtherPlatforms",
+        routeBasePath: "forOtherPlatforms",
+        sidebarPath: require.resolve("./sidebars.js"),
+        // ... other options
+      },
+    ],
+  ],
   i18n: {
     defaultLocale: "zh-Hans",
     locales: ["zh-Hans"],
@@ -84,7 +96,8 @@ const config = {
         ],
       },
       prism: {
-        theme: require("prism-react-renderer/themes/dracula"),
+        theme: darkCodeTheme,
+        darkTheme: lightCodeTheme,
         defaultLanguage: "js",
         additionalLanguages: [
           "rust",
