@@ -320,9 +320,3 @@ export function useSyncExternalStoreWithSelector<Snapshot, Selection>(
   return value;
 }
 ```
-
-## TODO
-
-- 插件介绍
-  - persist
-  - redux
