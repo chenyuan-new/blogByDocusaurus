@@ -1,12 +1,12 @@
 import React from "react";
-import DocItem from "@theme-original/DocItem";
+import Footer from "@theme-original/DocItem/Footer";
 import GiscusComponent from "@site/src/components/GiscusComponent";
 
-export default function DocItemWrapper(props) {
+export default function FooterWrapper(props) {
   return (
     <>
-      <DocItem {...props} />
       <GiscusComponent />
+      <Footer {...props} />
     </>
   );
 }
