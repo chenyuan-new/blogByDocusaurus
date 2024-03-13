@@ -50,6 +50,10 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+      metadata: [
+        { name: "keywords", content: "chen yuan, blog, frontend" },
+        { name: "twitter:card", content: "summary_large_image" },
+      ],
       docs: {
         sidebar: {
           hideable: true,

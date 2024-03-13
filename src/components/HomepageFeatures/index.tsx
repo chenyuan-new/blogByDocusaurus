@@ -14,7 +14,7 @@ const FeatureList: FeatureItem[] = [
     // Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
     description: (
       <>
-       { translate({message:"请给我一个star"})}{" "}
+       { translate({message:"请给我一个⭐️"})}{" "}
         <a
           target="_blank"
           rel="noopener noreferrer"
