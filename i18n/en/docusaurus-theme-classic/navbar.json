@@ -1,0 +1,18 @@
+{
+  "title": {
+    "message": "Chen yuan's blog",
+    "description": "The title in the navbar"
+  },
+  "item.label.知识库": {
+    "message": "database",
+    "description": "Navbar item with label 知识库"
+  },
+  "item.label.Blog": {
+    "message": "Blog",
+    "description": "Navbar item with label Blog"
+  },
+  "item.label.GitHub": {
+    "message": "GitHub",
+    "description": "Navbar item with label GitHub"
+  }
+}

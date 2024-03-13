@@ -17,22 +17,10 @@ const config = {
   favicon: "img/favicon.ico",
   organizationName: "chen yuan", // Usually your GitHub org/user name.
   projectName: "blog", // Usually your repo name.
-  plugins: [
-    "@docusaurus/theme-live-codeblock",
-    [
-      "@docusaurus/plugin-content-docs",
-      {
-        id: "forOtherPlatforms",
-        path: "forOtherPlatforms",
-        routeBasePath: "forOtherPlatforms",
-        sidebarPath: require.resolve("./sidebars.js"),
-        // ... other options
-      },
-    ],
-  ],
+  plugins: ["@docusaurus/theme-live-codeblock"],
   i18n: {
     defaultLocale: "zh-Hans",
-    locales: ["zh-Hans"],
+    locales: ["zh-Hans", "en"],
   },
   presets: [
     [
@@ -85,11 +73,12 @@ const config = {
           },
           {
             type: "doc",
-            docId: "源码阅读/zustand",
+            docId: "frontend/index",
             position: "right",
             label: "知识库",
           },
-          { to: "blog/hello", label: "blog", position: "right" },
+          { to: "blog", label: "Blog", position: "right" },
+          { type: "localeDropdown", position: "right" },
           {
             href: "https://github.com/chenyuan-new/blogByDocusaurus",
             label: "GitHub",

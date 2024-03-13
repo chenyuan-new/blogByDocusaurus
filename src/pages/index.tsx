@@ -3,12 +3,12 @@ import clsx from "clsx";
 import Layout from "@theme/Layout";
 import Link from "@docusaurus/Link";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
+import Translate from "@docusaurus/Translate";
 import styles from "./index.module.css";
 import HomepageFeatures from "@site/src/components/HomepageFeatures";
 import logo from "@site/static/img/me.jpg";
 import noise from "@site/static/img/noise.png";
 
-console.log(logo);
 function HomepageHeader() {
   const { siteConfig } = useDocusaurusContext();
 
@@ -113,9 +113,9 @@ function HomepageHeader() {
         <div className={styles.buttons}>
           <Link
             className="button button--secondary button--lg"
-            to="/docs/源码阅读/zustand"
+            to="/docs/frontend/"
           >
-            前端博客 →
+            <Translate>前端博客 →</Translate>
           </Link>
         </div>
       </div>

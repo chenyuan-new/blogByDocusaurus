@@ -1,0 +1,22 @@
+{
+  "version.label": {
+    "message": "Next",
+    "description": "The label for version current"
+  },
+  "sidebar.tutorialSidebar.category.前端": {
+    "message": "前端",
+    "description": "The label for category 前端 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.前端知识合集": {
+    "message": "前端知识合集",
+    "description": "The label for category 前端知识合集 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.源码阅读": {
+    "message": "源码阅读",
+    "description": "The label for category 源码阅读 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.实战讲解": {
+    "message": "实战讲解",
+    "description": "The label for category 实战讲解 in sidebar tutorialSidebar"
+  }
+}
