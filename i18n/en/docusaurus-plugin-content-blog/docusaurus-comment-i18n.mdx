@@ -1,0 +1,127 @@
+---
+description: A tutorial about how to add giscus comments and i18n to Docusaurus
+keywords: [giscus,tutorial,docusaurus]
+tags:
+  - giscus
+  - tutorial
+---
+
+# Add giscus comments and i18n to Docusaurus
+
+## Goal
+This post is detailed description of adding [giscus](https://giscus.app/) and i18n to website built by [Docusaurus](https://docusaurus.io/). 
+
+## Add giscus comments feature
+
+### Preparations
+- Enable discussion feature for your website's **public** github repo, it can be done in repo's `Settings/General/Features`. This is the [doc](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/enabling-features-for-your-repository/enabling-or-disabling-github-discussions-for-a-repository) you can refer.
+- [Configure](https://github.com/apps/giscus) giscus in your Github account and in section "Repository access" add **only** your website repo to be accessed by giscus
+
+### Get props value
+- In [giscus](https://giscus.app/) website, your can get props value in section "Configuration"
+- In "Page ↔️ Discussions Mapping" part, I recommend choosing "Discussion title contains page `<title>`", so that the change of url won't affect the searching result.
+- In "Discussion Category" part you can Announcements as recommended.
+- In "Enable giscus" part, you can get the props value, you can find that if you modify settings above, the value will change accordingly.
+- giscus has [wrapper componet](https://github.com/giscus/giscus-component?tab=readme-ov-file#documentation), you can use `@giscus/react`
+
+### Create giscus component
+
+install `@giscus/react`
+```bash
+pnpm install @giscus/react
+```
+
+create `src/components/Giscus.tsx` file:
+```tsx
+import React from "react";
+import Giscus from "@giscus/react";
+import { useColorMode } from "@docusaurus/theme-common";
+
+export default function GiscusComponent() {
+  const { colorMode } = useColorMode();
+
+  return (
+    <Giscus
+      repo="username/repo" // need to change
+      repoId="R_kgxxxxxx" // need to change 
+      category="Announcements"
+      categoryId="DIC_your category id" // need to change
+      mapping="title"
+      term="Welcome to @giscus/react component!"
+      strict="0"
+      reactionsEnabled="1"
+      emitMetadata="0"
+      inputPosition="bottom"
+      theme={colorMode}
+      lang="en"
+      loading="lazy"
+    />
+  );
+}
+```
+
+### Add component to blogs and docs
+Use [swizzle](https://docusaurus.io/docs/swizzling#swizzling-process) command to create `BlogPostItem` and `DocItem/Footer` in `src/theme` directory
+```bash
+pnpm run swizzle @docusaurus/theme-classic BlogPostItem -- --wrap
+
+pnpm run swizzle @docusaurus/theme-classic DocItem/Footer -- --wrap
+```
+
+Add `GiscusComponent` to `BlogPostItem` and `DocItem`
+```js title="src/theme/BlogPostItem/index.js"
+
+import React from "react";
+import BlogPostItem from "@theme-original/BlogPostItem";
+import GiscusComponent from "@site/src/components/GiscusComponent";
+
+export default function BlogPostItemWrapper(props) {
+  return (
+    <>
+      <BlogPostItem {...props} />
+      <GiscusComponent />
+    </>
+  );
+}
+```
+
+```js  title="src/theme/DocItem/Footer/index.js"
+
+import React from "react";
+import Footer from "@theme-original/DocItem/Footer";
+import GiscusComponent from "@site/src/components/GiscusComponent";
+
+export default function FooterWrapper(props) {
+  return (
+    <>
+      <GiscusComponent />
+      <Footer {...props} />
+    </>
+  );
+}
+```
+
+
+## Add i18n
+
+Actually, you can just follow this [tutorial](https://docusaurus.io/docs/i18n/tutorial). I will give some tips about the tutorial
+- you can just the code example below to configure i18n settings if you don't have complicated requirements.
+
+```js title="docusaurus.config.js"
+i18n: {
+    defaultLocale: 'fr',
+    locales: ['en', 'fr'],
+  },
+```
+- As shown in the picture, run `pnpm run write-translations --locale en` will  generate a lot of files.    
+![generated files](@site/static/img/blog/i18n-gen.png)
+
+- You should copy your docs and blogs to `i18n/en/docusaurus-plugin-content-docs/current` and `i18n/fr/docusaurus-plugin-content-blog`. 
+- **Note:** you need to create `current` directory by yourself
+
+## References
+
+[giscus.app](https://giscus.app/)   
+[giscus-component](https://github.com/giscus/giscus-component?tab=readme-ov-file#documentation)    
+[docusaurus swizzle](https://docusaurus.io/docs/swizzling#overview)  
+[docusaurus i18n tutorial](https://docusaurus.io/docs/i18n/tutorial)   

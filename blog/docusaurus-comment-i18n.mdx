@@ -1,0 +1,126 @@
+---
+description: 给基于Docusaurus构建的网站增加giscus评论和i18n功能
+keywords: [giscus,tutorial,docusaurus]
+tags:
+  - giscus
+  - tutorial
+---
+
+# 给基于Docusaurus搭建的网站增加giscus评论和i18n功能
+
+## 目标
+本文详细介绍了如何在使用 [Docusaurus](https://docusaurus.io/) 构建的网站中添加 [giscus](https://giscus.app/) 和 i18n。
+
+## 添加 giscus 评论功能
+
+### 准备工作
+- 给网站对应的 **公共** github 仓库启用讨论功能,可以在仓库的 `Settings/General/Features` 中完成。你可以参考这个[文档](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/enabling-features-for-your-repository/enabling-or-disabling-github-discussions-for-a-repository)。
+- 在 Github 账户中[配置](https://github.com/apps/giscus) giscus,并在 "Repository access" 部分仅允许 giscus 访问网站对应仓库。
+
+### 获取 props 值
+- 可以在[giscus](https://giscus.app/) 的"Configuration" 部分获取 props 值。
+- "Page ↔️ Discussions Mapping" 部分,推荐选择 "Discussion title contains page `<title>`", 这样 url 的改变不会影响搜索结果。
+- "Discussion Category" 部分,可以按照推荐选择 Announcements。
+- "Enable giscus" 部分，可以获取 props 值，如果修改前述的设置，该值也会相应改变。
+- giscus 有一个[wrapper component](https://github.com/giscus/giscus-component?tab=readme-ov-file#documentation)，推荐使用 `@giscus/react`
+
+### 创建 giscus 组件
+
+安装 `@giscus/react`
+```bash
+pnpm install @giscus/react
+```
+
+创建 `src/components/Giscus.tsx` 文件:
+```tsx
+import React from "react";
+import Giscus from "@giscus/react";
+import { useColorMode } from "@docusaurus/theme-common";
+
+export default function GiscusComponent() {
+  const { colorMode } = useColorMode();
+
+  return (
+    <Giscus
+      repo="username/repo" // 需要修改
+      repoId="R_kgxxxxxx" // 需要修改 
+      category="Announcements"
+      categoryId="DIC_your category id" // 需要修改
+      mapping="title"
+      term="Welcome to @giscus/react component!"
+      strict="0"
+      reactionsEnabled="1"
+      emitMetadata="0"
+      inputPosition="bottom"
+      theme={colorMode}
+      lang="en"
+      loading="lazy"
+    />
+  );
+}
+```
+
+### 在博客和文档中添加组件
+使用 [swizzle](https://docusaurus.io/docs/swizzling#swizzling-process) 命令在 `src/theme` 目录下创建 `BlogPostItem` 和 `DocItem/Footer`
+```bash
+pnpm run swizzle @docusaurus/theme-classic BlogPostItem -- --wrap
+
+pnpm run swizzle @docusaurus/theme-classic DocItem/Footer -- --wrap
+```
+
+在 `BlogPostItem` 和 `DocItem` 中添加 `GiscusComponent`
+```js title="src/theme/BlogPostItem/index.js"
+
+import React from "react";
+import BlogPostItem from "@theme-original/BlogPostItem";
+import GiscusComponent from "@site/src/components/GiscusComponent";
+
+export default function BlogPostItemWrapper(props) {
+  return (
+    <>
+      <BlogPostItem {...props} />
+      <GiscusComponent />
+    </>
+  );
+}
+```
+
+```js  title="src/theme/DocItem/Footer/index.js"
+
+import React from "react";
+import Footer from "@theme-original/DocItem/Footer";
+import GiscusComponent from "@site/src/components/GiscusComponent";
+
+export default function FooterWrapper(props) {
+  return (
+    <>
+      <GiscusComponent />
+      <Footer {...props} />
+    </>
+  );
+}
+```
+
+## 添加 i18n
+
+只需要按照这个[官方教程](https://docusaurus.io/docs/i18n/tutorial)操作就可以了。下面是给出的一些tips，建议在看教程前先看一下这个
+- 如果没有复杂的多语言配置需要，可以直接使用下面的代码示例来配置 i18n 设置。
+
+```js title="docusaurus.config.js"
+i18n: {
+    defaultLocale: 'fr',
+    locales: ['en', 'fr'],
+  },
+```
+- 如图所示,运行 `pnpm run write-translations --locale en` 将生成大量文件。    
+![生成的文件](@site/static/img/blog/i18n-gen.png)
+
+- 把blogs和docs目录下的文件复制到 `i18n/en/docusaurus-plugin-content-docs/current` 和 `i18n/fr/docusaurus-plugin-content-blog`。 
+- **注意:** 需要自己创建 `current` 目录
+
+## 参考资料
+
+[giscus.app](https://giscus.app/)   
+[giscus-component](https://github.com/giscus/giscus-component?tab=readme-ov-file#documentation)    
+[docusaurus swizzle](https://docusaurus.io/docs/swizzling#overview)  
+[docusaurus i18n 教程](https://docusaurus.io/docs/i18n/tutorial)
